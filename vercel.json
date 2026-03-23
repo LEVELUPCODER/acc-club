@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "acc-club",
   "public": true,
   "buildCommand": "echo 'Static build'",
   "outputDirectory": ".",
@@ -8,9 +7,7 @@
     "PYTHON_VERSION": "3.11"
   },
   "functions": {
-    "api/**/*.py": {
-      "runtime": "python3.11",
-      "memory": 1024,
+    "api/index.py": {
       "maxDuration": 60
     }
   },
