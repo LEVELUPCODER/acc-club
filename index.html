@@ -1461,7 +1461,7 @@
             </div>
           </div>
 
-          <form id="multiStepForm">
+          <form id="multiStepForm" onsubmit="submitRegistration(event)">
             <!-- Step 1: Basic Info -->
             <div id="step1" class="form-step">
               <h3 class="text-xl font-bold text-blue-400 mb-4">
@@ -1745,6 +1745,9 @@
                 <i class="fas fa-arrow-left mr-2"></i> Previous
               </button>
               <button
+                type="button"
+                id="nextBtn"
+                onclick="changeStep(1)"
                 class="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-2 px-4 rounded transition"
               >
                 Next <i class="fas fa-arrow-right ml-2"></i>
@@ -1752,7 +1755,6 @@
               <button
                 type="submit"
                 id="submitBtn"
-                onclick="submitRegistration(event)"
                 class="flex-1 bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-800 hover:to-blue-900 text-white font-bold py-2 px-4 rounded transition"
                 style="display: none"
               >
