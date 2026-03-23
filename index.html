@@ -1,0 +1,2190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <title>ACC Club - Analytics & Consultancy Club</title>
+    <style>
+      * {
+        scroll-behavior: smooth;
+      }
+      .hero-gradient {
+        background: linear-gradient(
+          135deg,
+          #050a11 0%,
+          #0a0f1a 50%,
+          #050a11 100%
+        );
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-content {
+        text-align: left;
+        max-width: 600px;
+      }
+      .hero-title {
+        font-size: 3.5rem;
+        font-weight: 900;
+        letter-spacing: -2px;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, #4ba3d8, #3965b3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .hero-subtitle {
+        font-size: 1.25rem;
+        color: #a0aec0;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+      .stat-card {
+        background: rgba(15, 25, 45, 0.4);
+        border: 1px solid rgba(75, 163, 216, 0.2);
+        padding: 1.5rem;
+        border-radius: 14px;
+        text-align: center;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .stat-value {
+        font-size: 2.5rem;
+        font-weight: 900;
+        color: #5db3e8;
+        margin-bottom: 0.5rem;
+      }
+      .stat-label {
+        color: #94a3b8;
+        font-size: 0.875rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .grid-card {
+        background: rgba(10, 15, 30, 0.5);
+        border: 1px solid rgba(75, 163, 216, 0.15);
+        padding: 2rem;
+        border-radius: 16px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .grid-card:hover {
+        border-color: rgba(75, 163, 216, 0.4);
+        background: rgba(15, 25, 50, 0.6);
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(75, 163, 216, 0.1);
+      }
+      .card-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        background: linear-gradient(
+          135deg,
+          rgba(75, 163, 216, 0.6),
+          rgba(93, 179, 232, 0.5)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        color: white;
+        margin-bottom: 1.5rem;
+      }
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
+      }
+      .card-text {
+        color: #cbd5e1;
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+      .testimonial-card {
+        background: rgba(10, 20, 35, 0.4);
+        border-left: 4px solid #5db3e8;
+        padding: 2rem;
+        border-radius: 12px;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .testimonial-text {
+        color: #e2e8f0;
+        font-size: 1rem;
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+        font-style: italic;
+      }
+      .testimonial-author {
+        color: #94a3b8;
+        font-size: 0.875rem;
+      }
+      .testimonial-name {
+        color: #5db3e8;
+        font-weight: 600;
+      }
+      .pulse-dot {
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+      .fade-in {
+        animation: fadeIn 0.8s ease-in;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .gallery-item {
+        cursor: pointer;
+        overflow: hidden;
+        border-radius: 12px;
+        position: relative;
+      }
+      .gallery-item img {
+        transition: transform 0.3s ease;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+      }
+      .modal.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        animation: zoomIn 0.3s ease;
+        position: relative;
+      }
+      @keyframes zoomIn {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+      @keyframes successCheckmark {
+        0% {
+          transform: scale(0) rotate(-45deg);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.2) rotate(10deg);
+        }
+        100% {
+          transform: scale(1) rotate(0deg);
+          opacity: 1;
+        }
+      }
+      .resource-card {
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+      }
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        background: linear-gradient(135deg, #5db3e8, #4ba3d8, #3965b3);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .toast-notification {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: linear-gradient(
+          135deg,
+          rgba(75, 163, 216, 0.8),
+          rgba(93, 179, 232, 0.7)
+        );
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(75, 163, 216, 0.3);
+        animation: slideIn 0.4s ease;
+        z-index: 2000;
+        backdrop-filter: blur(8px);
+      }
+      @keyframes slideIn {
+        from {
+          transform: translateX(400px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      @keyframes float-1 {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        33% {
+          transform: translate(30px, -50px);
+        }
+        66% {
+          transform: translate(-30px, 50px);
+        }
+      }
+      @keyframes float-2 {
+        0%,
+        100% {
+          transform: translate(0, 0);
+        }
+        33% {
+          transform: translate(-40px, 40px);
+        }
+        66% {
+          transform: translate(40px, -30px);
+        }
+      }
+      @keyframes float-3 {
+        0%,
+        100% {
+          transform: translate(-50%, -50%);
+        }
+        50% {
+          transform: translate(calc(-50% + 50px), calc(-50% - 50px));
+        }
+      }
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .animate-float-1 {
+        animation: float-1 6s ease-in-out infinite;
+      }
+      .animate-float-2 {
+        animation: float-2 8s ease-in-out infinite;
+      }
+      .animate-float-3 {
+        animation: float-3 7s ease-in-out infinite;
+      }
+      .animate-fade-in-down {
+        animation: fadeInDown 0.8s ease-out;
+      }
+      .particles-container {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        pointer-events: none;
+      }
+      .particle {
+        position: absolute;
+        opacity: 0.5;
+        border-radius: 50%;
+        animation: particle-drift 8s infinite ease-in-out;
+      }
+      .particle-1 {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(
+          135deg,
+          rgba(75, 163, 216, 0.3),
+          rgba(93, 179, 232, 0.2)
+        );
+        top: 10%;
+        left: 5%;
+        animation-delay: 0s;
+      }
+      .particle-2 {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(
+          135deg,
+          rgba(75, 163, 216, 0.25),
+          rgba(93, 179, 232, 0.15)
+        );
+        top: 60%;
+        right: 10%;
+        animation-delay: 1s;
+      }
+      .particle-3 {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(
+          135deg,
+          rgba(93, 179, 232, 0.2),
+          rgba(57, 101, 179, 0.15)
+        );
+        top: 30%;
+        right: 5%;
+        animation-delay: 2s;
+      }
+      .particle-4 {
+        width: 35px;
+        height: 35px;
+        background: linear-gradient(
+          135deg,
+          rgba(75, 163, 216, 0.15),
+          rgba(93, 179, 232, 0.1)
+        );
+        bottom: 20%;
+        left: 10%;
+        animation-delay: 3s;
+      }
+      .particle-5 {
+        width: 45px;
+        height: 45px;
+        background: linear-gradient(
+          135deg,
+          rgba(93, 179, 232, 0.2),
+          rgba(75, 163, 216, 0.15)
+        );
+        top: 50%;
+        left: 1%;
+        animation-delay: 1.5s;
+      }
+      @keyframes particle-drift {
+        0%,
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+          opacity: 0.3;
+        }
+        50% {
+          transform: translate(100px, -100px) rotate(180deg);
+          opacity: 0.8;
+        }
+      }
+      .btn-gradient {
+        background: linear-gradient(135deg, #00d4cc, #00f0ff);
+        transition: all 0.3s ease;
+      }
+      .btn-gradient:hover {
+        box-shadow: 0 8px 25px rgba(0, 240, 255, 0.6);
+      }
+      .modal-form {
+        background: linear-gradient(
+          135deg,
+          rgba(5, 10, 17, 0.8),
+          rgba(10, 15, 30, 0.8)
+        );
+        border: 1px solid rgba(75, 163, 216, 0.2);
+        padding: 40px;
+        border-radius: 15px;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+      }
+      .form-input {
+        background: #0a0f1a;
+        border: 1px solid rgba(75, 163, 216, 0.25);
+        color: white;
+      }
+      .form-input:focus {
+        outline: none;
+        box-shadow: 0 0 15px rgba(75, 163, 216, 0.4);
+        border-color: rgba(75, 163, 216, 0.5);
+      }
+      .bg-text {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 200px;
+        font-weight: 900;
+        color: rgba(75, 163, 216, 0.04);
+        white-space: nowrap;
+        pointer-events: none;
+        z-index: 0;
+        text-shadow: 0 0 50px rgba(75, 163, 216, 0.08);
+        letter-spacing: 20px;
+      }
+      .stylish-logo {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(
+          135deg,
+          rgba(75, 163, 216, 0.7) 0%,
+          rgba(93, 179, 232, 0.6) 50%,
+          rgba(57, 101, 179, 0.6) 100%
+        );
+        border-radius: 12px;
+        font-weight: 900;
+        font-size: 28px;
+        color: white;
+        box-shadow: 0 8px 25px rgba(75, 163, 216, 0.25);
+        letter-spacing: 2px;
+      }
+      .club-title {
+        background: linear-gradient(
+          135deg,
+          rgba(93, 179, 232, 0.9) 0%,
+          rgba(75, 163, 216, 0.8) 30%,
+          rgba(93, 179, 232, 0.7) 60%,
+          rgba(57, 101, 179, 0.7) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 900;
+        font-size: 2.5rem;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+      .form-section {
+        max-width: 600px;
+        width: 100%;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+      .form-grid > div:nth-child(2n + 1):nth-last-child(1) {
+        grid-column: 1 / -1;
+      }
+      .col-span-2 {
+        grid-column: 1 / -1;
+      }
+      .form-step {
+        animation: fadeIn 0.3s ease;
+      }
+      .success-checkmark {
+        font-size: 80px;
+        color: #0d9488;
+        animation: successCheckmark 0.8s ease-out;
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .form-full {
+        grid-column: 1 / -1;
+      }
+      .success-checkmark {
+        animation: scaleIn 0.5s ease;
+      }
+      @keyframes scaleIn {
+        from {
+          transform: scale(0);
+        }
+        to {
+          transform: scale(1);
+        }
+      }
+      .form-step {
+        display: none;
+      }
+      .form-step.active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gradient-to-b from-[#050a11] via-[#0a0f1a] to-[#060d15] text-slate-200 font-sans"
+  >
+    <!-- Background Text -->
+    <div class="bg-text">ACC</div>
+
+    <!-- Animated Background Particles -->
+    <div class="particles-container">
+      <div class="particle particle-1"></div>
+      <div class="particle particle-2"></div>
+      <div class="particle particle-3"></div>
+      <div class="particle particle-4"></div>
+      <div class="particle particle-5"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav
+      class="fixed top-0 left-0 right-0 bg-[#050a11]/90 backdrop-blur-lg border-b border-blue-900/20 z-40"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center gap-4">
+            <div class="stylish-logo">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="flex flex-col">
+              <span
+                class="text-xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500"
+              >
+                ACC
+              </span>
+              <span
+                class="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-600 tracking-widest"
+                >ANALYTICS</span
+              >
+            </div>
+          </div>
+
+          <div class="hidden md:flex gap-8 text-sm">
+            <a href="#home" class="hover:text-blue-400 transition">Home</a>
+            <a href="#about" class="hover:text-blue-400 transition">About</a>
+            <a href="#gallery" class="hover:text-blue-400 transition"
+              >Gallery</a
+            >
+            <a href="#services" class="hover:text-blue-400 transition"
+              >Services</a
+            >
+            <a href="#resources" class="hover:text-blue-400 transition"
+              >Resources</a
+            >
+            <a href="#team" class="hover:text-blue-400 transition">Team</a>
+          </div>
+
+          <button onclick="toggleMenu()" class="md:hidden text-white text-2xl">
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <button
+            class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-2 rounded-lg transition hidden md:block transform hover:scale-105"
+            onclick="openRegistrationForm()"
+          >
+            Join Us
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="hero-gradient pt-32 pb-20 min-h-screen flex items-center relative overflow-hidden"
+    >
+      <div class="absolute inset-0 opacity-20">
+        <div
+          class="absolute top-20 right-20 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-float-1"
+        ></div>
+        <div
+          class="absolute bottom-20 left-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-float-2"
+        ></div>
+        <div
+          class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl animate-float-3"
+        ></div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-4 relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <!-- Left Content -->
+          <div class="hero-content fade-in">
+            <div class="mb-6">
+              <span
+                class="inline-block px-3 py-1 bg-blue-900/30 border border-blue-700 rounded text-blue-300 text-sm font-medium mb-4"
+              >
+                PROFESSIONAL DEVELOPMENT
+              </span>
+            </div>
+            <h1 class="hero-title">
+              Shape Your Analytics & Consultancy Career
+            </h1>
+            <p class="hero-subtitle">
+              Join India's premier club for analytics professionals. Build
+              real-world expertise, network with industry leaders, and
+              accelerate your consultancy career.
+            </p>
+            <div class="flex flex-wrap gap-4">
+              <button
+                class="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg hover:shadow-lg hover:shadow-blue-500/30 transition transform hover:scale-105"
+                onclick="openRegistrationForm()"
+              >
+                Join the Club
+              </button>
+              <button
+                class="px-8 py-3 border-2 border-blue-700 text-blue-300 font-semibold rounded-lg hover:bg-blue-700/15 transition"
+                onclick="scrollToSection('resources')"
+              >
+                Explore Resources
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Stats Grid -->
+          <div class="grid grid-cols-2 gap-4">
+            <div class="stat-card">
+              <div class="stat-value" data-target="180">0<span>+</span></div>
+              <div class="stat-label">Members Active</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" data-target="42">0</div>
+              <div class="stat-label">Projects Completed</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" data-target="98">0<span>%</span></div>
+              <div class="stat-label">Success Rate</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value">
+                2.5M<span style="font-size: 1.2rem">+</span>
+              </div>
+              <div class="stat-label">Data Processed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Join Section -->
+    <section class="py-24 bg-[#050a11]/50">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-white mb-4">
+            Why Choose ACC Club?
+          </h2>
+          <p class="text-slate-400 text-lg">
+            Professional benefits designed for your career growth
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="grid-card">
+            <div class="card-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="card-title">Industry Expertise</h3>
+            <p class="card-text">
+              Learn from leading consultants and analytics professionals with
+              proven track records in top companies.
+            </p>
+          </div>
+
+          <div class="grid-card">
+            <div class="card-icon">
+              <i class="fas fa-network-wired"></i>
+            </div>
+            <h3 class="card-title">Networking Opportunities</h3>
+            <p class="card-text">
+              Connect with like-minded professionals, mentors, and industry
+              executives in our exclusive community.
+            </p>
+          </div>
+
+          <div class="grid-card">
+            <div class="card-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <h3 class="card-title">Real Projects</h3>
+            <p class="card-text">
+              Work on live consulting projects, build your portfolio, and gain
+              practical experience valued by employers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section class="py-24">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-white mb-4">
+            Member Success Stories
+          </h2>
+          <p class="text-slate-400 text-lg">
+            Real achievements from our community members
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "Joining ACC Club transformed my career. The projects and
+              mentorship helped me land a senior analyst role at a top
+              consultancy firm."
+            </p>
+            <div class="testimonial-author">
+              — <span class="testimonial-name">Priya Sharma</span>, Senior
+              Analyst @ Accenture
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "The data science projects exposed me to real-world business
+              problems. I improved my technical skills significantly."
+            </p>
+            <div class="testimonial-author">
+              — <span class="testimonial-name">Rajesh Patel</span>, Data
+              Scientist @ Deloitte
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <p class="testimonial-text">
+              "The network I built at ACC Club became invaluable. Many of my
+              current clients came from this community."
+            </p>
+            <div class="testimonial-author">
+              — <span class="testimonial-name">Neha Gupta</span>, Independent
+              Consultant
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-[#0a0f1a]/60">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-white mb-4 text-center">
+          About ACC Club
+        </h2>
+        <p class="text-slate-400 text-center mb-12 max-w-2xl mx-auto">
+          We're a premier club dedicated to developing analytics and consultancy
+          skills among students
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="grid-card">
+            <div class="card-icon">
+              <i class="fas fa-chart-line"></i>
+            </div>
+            <h3 class="card-title">Data-Driven</h3>
+            <p class="card-text">
+              Learn to extract actionable insights from complex datasets using
+              modern analytics tools and techniques.
+            </p>
+          </div>
+
+          <div class="grid-card">
+            <div class="card-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <h3 class="card-title">Strategy Focused</h3>
+            <p class="card-text">
+              Develop strategic thinking and consultancy frameworks to solve
+              real-world business challenges.
+            </p>
+          </div>
+
+          <div class="grid-card">
+            <div class="card-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3 class="card-title">Community Driven</h3>
+            <p class="card-text">
+              Connect with like-minded peers, mentors, and industry
+              professionals in a collaborative environment.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-white mb-4 text-center">
+          Club Gallery
+        </h2>
+        <p class="text-slate-400 text-center mb-12 max-w-2xl mx-auto">
+          Moments from our events, workshops, and team collaborations
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Gallery Images -->
+          <div
+            class="gallery-item h-64 bg-slate-800 border border-slate-700 rounded-lg overflow-hidden"
+            onclick="openModal(0)"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=500&fit=crop"
+              alt="Team Meeting"
+            />
+            <div
+              class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition flex items-center justify-center"
+            >
+              <i class="fas fa-search-plus text-white text-3xl"></i>
+            </div>
+          </div>
+
+          <div
+            class="gallery-item h-64 bg-slate-800 border border-slate-700 rounded-lg overflow-hidden"
+            onclick="openModal(1)"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=500&fit=crop"
+              alt="Data Workshop"
+            />
+            <div
+              class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition flex items-center justify-center"
+            >
+              <i class="fas fa-search-plus text-white text-3xl"></i>
+            </div>
+          </div>
+
+          <div
+            class="gallery-item h-64 bg-slate-800 border border-slate-700 rounded-lg overflow-hidden"
+            onclick="openModal(2)"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=500&fit=crop"
+              alt="Analysis Session"
+            />
+            <div
+              class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition flex items-center justify-center"
+            >
+              <i class="fas fa-search-plus text-white text-3xl"></i>
+            </div>
+          </div>
+
+          <div
+            class="gallery-item h-64 bg-slate-800 border border-slate-700 rounded-lg overflow-hidden"
+            onclick="openModal(3)"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=500&fit=crop"
+              alt="Presentation"
+            />
+            <div
+              class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition flex items-center justify-center"
+            >
+              <i class="fas fa-search-plus text-white text-3xl"></i>
+            </div>
+          </div>
+
+          <div
+            class="gallery-item h-64 bg-slate-800 border border-slate-700 rounded-lg overflow-hidden"
+            onclick="openModal(4)"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=500&fit=crop"
+              alt="Collaboration"
+            />
+            <div
+              class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition flex items-center justify-center"
+            >
+              <i class="fas fa-search-plus text-white text-3xl"></i>
+            </div>
+          </div>
+
+          <div
+            class="gallery-item h-64 bg-slate-800 border border-slate-700 rounded-lg overflow-hidden"
+            onclick="openModal(5)"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=500&fit=crop"
+              alt="Success"
+            />
+            <div
+              class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition flex items-center justify-center"
+            >
+              <i class="fas fa-search-plus text-white text-3xl"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Modal -->
+    <div id="galleryModal" class="modal" onclick="closeModal(event)">
+      <div class="modal-content">
+        <img
+          id="modalImage"
+          src=""
+          alt="Gallery Image"
+          class="max-w-2xl max-h-screen"
+        />
+        <button
+          onclick="closeModal()"
+          class="absolute top-4 right-4 bg-red-600 hover:bg-red-700 text-white w-10 h-10 rounded-full flex items-center justify-center"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-[#0a0f1a]/60">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-white mb-4 text-center">
+          Our Domains
+        </h2>
+        <p class="text-slate-400 text-center mb-12 max-w-2xl mx-auto">
+          Explore the key areas where we focus our consultancy expertise
+        </p>
+
+        <div class="grid md:grid-cols-3 gap-8">
+          <!-- Finance Domain -->
+          <div class="grid-card">
+            <div class="card-icon">
+              <i class="fas fa-coins"></i>
+            </div>
+            <h3 class="card-title">Finance Analytics</h3>
+            <p class="card-text">
+              Investment analysis, market trends, portfolio optimization, and
+              financial forecasting using cutting-edge data models.
+            </p>
+            <ul class="space-y-2 text-sm text-slate-300">
+              <li>
+                <i class="fas fa-check text-green-400 mr-2"></i>Risk Analysis
+              </li>
+              <li>
+                <i class="fas fa-check text-green-400 mr-2"></i>Market
+                Prediction
+              </li>
+              <li>
+                <i class="fas fa-check text-green-400 mr-2"></i>Asset Valuation
+              </li>
+            </ul>
+          </div>
+
+          <!-- Technology Domain -->
+          <div class="grid-card">
+            <div class="card-icon">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3 class="card-title">Tech Consulting</h3>
+            <p class="card-text">
+              Digital transformation, software metrics, tech stack optimization,
+              and innovation strategy for startups and enterprises.
+            </p>
+            <ul class="space-y-2 text-sm text-slate-300">
+              <li>
+                <i class="fas fa-check text-green-400 mr-2"></i>Tech Stack
+                Analysis
+              </li>
+              <li>
+                <i class="fas fa-check text-green-400 mr-2"></i>DevOps
+                Optimization
+              </li>
+              <li>
+                <i class="fas fa-check text-green-400 mr-2"></i>Cloud Strategy
+              </li>
+            </ul>
+          </div>
+
+          <!-- Strategy Domain -->
+          <div class="grid-card">
+            <div class="card-icon">
+              <i class="fas fa-chess"></i>
+            </div>
+            <h3 class="card-title">Strategic Planning</h3>
+            <p class="card-text">
+              Business strategy, market entry analysis, competitive positioning,
+              and growth planning backed by deep data insights.
+            </p>
+            <ul class="space-y-2 text-sm text-slate-300">
+              <li>
+                <i class="fas fa-check text-green-400 mr-2"></i>Market Entry
+              </li>
+              <li>
+                <i class="fas fa-check text-green-400 mr-2"></i>Competitive
+                Analysis
+              </li>
+              <li>
+                <i class="fas fa-check text-green-400 mr-2"></i>Growth Strategy
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section id="resources" class="py-20">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-white mb-4 text-center">
+          Learning Resources
+        </h2>
+        <p class="text-slate-400 text-center mb-12 max-w-2xl mx-auto">
+          Access our curated collection of tools, templates, and guides for
+          analytics and consultancy
+        </p>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Resource Cards -->
+          <div class="grid-card group">
+            <div class="card-icon">
+              <i class="fas fa-file-pdf"></i>
+            </div>
+            <h3 class="card-title">Case Study Templates</h3>
+            <p class="card-text text-sm mb-4">
+              Professional templates for writing and presenting case studies
+            </p>
+            <button
+              class="text-blue-400 hover:text-blue-300 text-sm font-semibold transition"
+              onclick="
+                showNotification(
+                  'Case Study Templates downloading...',
+                  'success',
+                )
+              "
+            >
+              Download <i class="fas fa-download ml-2"></i>
+            </button>
+          </div>
+
+          <div class="grid-card group">
+            <div class="card-icon">
+              <i class="fas fa-database"></i>
+            </div>
+            <h3 class="card-title">Data Sets</h3>
+            <p class="card-text text-sm mb-4">
+              Real-world datasets for practice and analysis projects
+            </p>
+            <button
+              class="text-blue-400 hover:text-blue-300 text-sm font-semibold transition"
+              onclick="
+                showNotification('Opening datasets library...', 'success')
+              "
+            >
+              Explore <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+          </div>
+
+          <div class="grid-card group">
+            <div class="card-icon">
+              <i class="fas fa-book"></i>
+            </div>
+            <h3 class="card-title">Study Materials</h3>
+            <p class="card-text text-sm mb-4">
+              Comprehensive guides on analytics methodologies and frameworks
+            </p>
+            <button
+              class="text-blue-400 hover:text-blue-300 text-sm font-semibold transition"
+              onclick="
+                showNotification('Loading study materials...', 'success')
+              "
+            >
+              Read <i class="fas fa-book-reader ml-2"></i>
+            </button>
+          </div>
+
+          <div class="grid-card group">
+            <div class="card-icon">
+              <i class="fas fa-tools"></i>
+            </div>
+            <h3 class="card-title">Tools & Software</h3>
+            <p class="card-text text-sm mb-4">
+              Recommended tools for data analysis and visualization
+            </p>
+            <button
+              class="text-blue-400 hover:text-blue-300 text-sm font-semibold transition"
+              onclick="showNotification('Tools list generated!', 'success')"
+            >
+              View List <i class="fas fa-list ml-2"></i>
+            </button>
+          </div>
+
+          <div class="grid-card group">
+            <div class="card-icon">
+              <i class="fas fa-video"></i>
+            </div>
+            <h3 class="card-title">Video Tutorials</h3>
+            <p class="card-text text-sm mb-4">
+              Step-by-step video guides on analytics concepts and tools
+            </p>
+            <button
+              class="text-blue-400 hover:text-blue-300 text-sm font-semibold transition"
+              onclick="showNotification('Opening video playlist...', 'success')"
+            >
+              Watch <i class="fas fa-play ml-2"></i>
+            </button>
+          </div>
+
+          <div class="grid-card group">
+            <div class="card-icon">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h3 class="card-title">Events & Workshops</h3>
+            <p class="card-text text-sm mb-4">
+              Upcoming sessions and workshops with industry experts
+            </p>
+            <button
+              class="text-blue-400 hover:text-blue-300 text-sm font-semibold transition"
+              onclick="
+                showNotification('Opening event registration...', 'success')
+              "
+            >
+              Register <i class="fas fa-ticket-alt ml-2"></i>
+            </button>
+          </div>
+
+          <div class="grid-card group">
+            <div class="card-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3 class="card-title">Code Snippets</h3>
+            <p class="card-text text-sm mb-4">
+              Python, R, SQL scripts for common analytics tasks
+            </p>
+            <button
+              class="text-blue-400 hover:text-blue-300 text-sm font-semibold transition"
+              onclick="
+                showNotification('Viewing code repository...', 'success')
+              "
+            >
+              Browse <i class="fas fa-github ml-2"></i>
+            </button>
+          </div>
+
+          <div class="grid-card group">
+            <div class="card-icon">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <h3 class="card-title">Certifications</h3>
+            <p class="card-text text-sm mb-4">
+              Professional certifications and achievement badges for members
+            </p>
+            <button
+              class="text-blue-400 hover:text-blue-300 text-sm font-semibold transition"
+              onclick="
+                showNotification(
+                  'Certification program details loading...',
+                  'success',
+                )
+              "
+            >
+              Earn <i class="fas fa-star ml-2"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-[#0a0f1a]/60">
+      <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-4xl font-bold text-white mb-4 text-center">
+          Meet Our Team
+        </h2>
+        <p class="text-slate-400 text-center mb-12 max-w-2xl mx-auto">
+          Passionate professionals driving the ACC Club forward
+        </p>
+
+        <div class="grid md:grid-cols-4 gap-8">
+          <!-- Team Member 1 -->
+          <div class="grid-card text-center">
+            <div
+              class="w-32 h-32 mx-auto mb-4 bg-gradient-to-br from-blue-700 to-blue-800 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-user text-white text-5xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Anant Chaudhary</h3>
+            <p class="text-blue-400 text-sm mb-3">Club President</p>
+            <p class="text-slate-300 text-sm mb-4">
+              Visionary leader driving ACC's mission to empower students with
+              advanced analytics and strategic consulting expertise
+            </p>
+            <div class="flex justify-center gap-3">
+              <a href="#" class="text-slate-400 hover:text-blue-400 transition"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+              <a href="#" class="text-slate-400 hover:text-blue-400 transition"
+                ><i class="fab fa-twitter"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- Team Member 2 -->
+          <div class="grid-card text-center">
+            <div
+              class="w-32 h-32 mx-auto mb-4 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-user text-white text-5xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Mohit Raj</h3>
+            <p class="text-blue-400 text-sm mb-3">Finance Head</p>
+            <p class="text-slate-300 text-sm mb-4">
+              Financial analyst specializing in investment strategies, market
+              analytics, and data-driven financial forecasting
+            </p>
+            <div class="flex justify-center gap-3">
+              <a href="#" class="text-slate-400 hover:text-blue-400 transition"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+              <a href="#" class="text-slate-400 hover:text-blue-400 transition"
+                ><i class="fab fa-twitter"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- Team Member 3 -->
+          <div class="grid-card text-center">
+            <div
+              class="w-32 h-32 mx-auto mb-4 bg-gradient-to-br from-blue-700 to-blue-800 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-user text-white text-5xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Tushar Kumar</h3>
+            <p class="text-blue-400 text-sm mb-3">Strategy Head</p>
+            <p class="text-slate-300 text-sm mb-4">
+              Strategic consultant with expertise in business planning, market
+              analysis, and competitive positioning strategies
+            </p>
+            <div class="flex justify-center gap-3">
+              <a href="#" class="text-slate-400 hover:text-blue-400 transition"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+              <a href="#" class="text-slate-400 hover:text-blue-400 transition"
+                ><i class="fab fa-twitter"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- Team Member 4 -->
+          <div class="grid-card text-center">
+            <div
+              class="w-32 h-32 mx-auto mb-4 bg-gradient-to-br from-blue-600 to-blue-900 rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-user text-white text-5xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-1">Ravi Ranjan</h3>
+            <p class="text-blue-400 text-sm mb-3">Operations Manager</p>
+            <p class="text-slate-300 text-sm mb-4">
+              Operations expert ensuring seamless execution of events, projects,
+              and initiatives with precision and efficiency
+            </p>
+            <div class="flex justify-center gap-3">
+              <a href="#" class="text-slate-400 hover:text-blue-400 transition"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+              <a href="#" class="text-slate-400 hover:text-blue-400 transition"
+                ><i class="fab fa-twitter"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <h2 class="text-4xl font-bold text-white mb-6">
+          Ready to Join ACC Club?
+        </h2>
+        <p class="text-xl text-slate-400 mb-8">
+          Become part of a community driving innovation in analytics and
+          consultancy. Limited spots available for this semester.
+        </p>
+        <div class="flex gap-4 justify-center flex-wrap">
+          <button
+            class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-12 py-4 rounded-lg font-semibold transition transform hover:scale-105 shadow-lg hover:shadow-blue-500/30"
+            onclick="openRegistrationForm()"
+          >
+            Apply Now <i class="fas fa-check-circle ml-2"></i>
+          </button>
+          <button
+            class="border-2 border-blue-700 text-blue-300 hover:bg-blue-700/10 px-12 py-4 rounded-lg font-semibold transition"
+            onclick="scheduleCall()"
+          >
+            Schedule a Call <i class="fas fa-phone ml-2"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#020408] border-t border-blue-900/20 py-12">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="grid md:grid-cols-4 gap-8 mb-8">
+          <div>
+            <h4 class="text-white font-bold mb-4 flex items-center gap-2">
+              <div
+                class="w-8 h-8 bg-blue-600 rounded flex items-center justify-center text-white font-bold"
+              >
+                A
+              </div>
+              ACC Club
+            </h4>
+            <p class="text-slate-400 text-sm">
+              Analytics & Consultancy Club - Driving data-driven decisions and
+              strategic insights.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-white font-bold mb-4">Quick Links</h4>
+            <ul class="space-y-2 text-slate-400 text-sm">
+              <li><a href="#" class="hover:text-blue-400">Home</a></li>
+              <li><a href="#" class="hover:text-blue-400">About Us</a></li>
+              <li><a href="#" class="hover:text-blue-400">Services</a></li>
+              <li><a href="#" class="hover:text-blue-400">Contact</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-white font-bold mb-4">Resources</h4>
+            <ul class="space-y-2 text-slate-400 text-sm">
+              <li><a href="#" class="hover:text-blue-400">Blog</a></li>
+              <li><a href="#" class="hover:text-blue-400">Documentation</a></li>
+              <li><a href="#" class="hover:text-blue-400">FAQ</a></li>
+              <li><a href="#" class="hover:text-blue-400">Support</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-white font-bold mb-4">Connect</h4>
+            <div class="flex gap-4 text-slate-400">
+              <a href="#" class="hover:text-blue-400 text-lg"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" class="hover:text-blue-400 text-lg"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="hover:text-blue-400 text-lg"
+                ><i class="fab fa-linkedin"></i
+              ></a>
+              <a href="#" class="hover:text-blue-400 text-lg"
+                ><i class="fab fa-instagram"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="border-t border-slate-800 pt-8 flex justify-between items-center flex-wrap gap-4"
+        >
+          <p class="text-slate-500 text-sm">
+            &copy; 2026 ACC Club. All rights reserved.
+          </p>
+          <div class="flex gap-6 text-slate-500 text-sm">
+            <a href="#" class="hover:text-slate-300">Privacy Policy</a>
+            <a href="#" class="hover:text-slate-300">Terms of Service</a>
+            <a href="#" class="hover:text-slate-300">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Registration Modal -->
+    <div
+      id="registrationModal"
+      class="modal"
+      onclick="closeRegistrationForm(event)"
+    >
+      <div
+        class="modal-content modal-form max-w-2xl"
+        style="max-height: 85vh; overflow-y: auto"
+      >
+        <button
+          onclick="closeRegistrationForm()"
+          class="absolute top-4 right-4 text-blue-400 hover:text-blue-300 text-2xl z-50"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+
+        <!-- Success Screen -->
+        <div
+          id="successScreen"
+          style="display: none; text-align: center; padding: 40px"
+        >
+          <div
+            style="
+              font-size: 60px;
+              margin-bottom: 20px;
+              animation: successCheckmark 0.6s ease-in-out;
+            "
+          >
+            <i class="fas fa-check-circle" style="color: #0d9488"></i>
+          </div>
+          <h2 class="text-3xl font-bold text-white mb-4">
+            Welcome to ACC Club!
+          </h2>
+          <p class="text-gray-300 mb-6">
+            Thank you for registering. We've sent a confirmation email with next
+            steps.
+          </p>
+          <div
+            id="confirmationDetails"
+            class="text-left bg-blue-900/30 p-4 rounded mb-6 text-gray-300"
+          ></div>
+          <button
+            onclick="closeRegistrationForm()"
+            class="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-2 px-4 rounded transition"
+          >
+            Return to Home <i class="fas fa-home ml-2"></i>
+          </button>
+        </div>
+
+        <!-- Multi-Step Form -->
+        <div id="formContent">
+          <div class="mb-6">
+            <h2 class="text-3xl font-bold text-white mb-2">Join ACC Club</h2>
+            <div class="flex justify-between items-center mb-4">
+              <p class="text-gray-400">Complete your application</p>
+              <div class="text-sm text-blue-400 font-bold">
+                Step <span id="currentStep">1</span> of 4
+              </div>
+            </div>
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-700 h-2 rounded overflow-hidden">
+              <div
+                id="progressBar"
+                class="bg-gradient-to-r from-blue-600 to-teal-500 h-full"
+                style="width: 25%; transition: width 0.3s"
+              ></div>
+            </div>
+          </div>
+
+          <form id="multiStepForm">
+            <!-- Step 1: Basic Info -->
+            <div id="step1" class="form-step">
+              <h3 class="text-xl font-bold text-blue-400 mb-4">
+                Basic Information
+              </h3>
+              <div class="form-grid">
+                <div>
+                  <label class="block text-blue-300 text-sm font-bold mb-2"
+                    >Full Name *</label
+                  >
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-input w-full px-4 py-2 rounded"
+                    placeholder="Your Full Name"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block text-blue-300 text-sm font-bold mb-2"
+                    >Email Address *</label
+                  >
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-input w-full px-4 py-2 rounded"
+                    placeholder="your@email.com"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block text-blue-300 text-sm font-bold mb-2"
+                    >Phone Number *</label
+                  >
+                  <input
+                    type="tel"
+                    name="phone"
+                    class="form-input w-full px-4 py-2 rounded"
+                    placeholder="10-digit phone number"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block text-blue-300 text-sm font-bold mb-2"
+                    >Gender</label
+                  >
+                  <select
+                    name="gender"
+                    class="form-input w-full px-4 py-2 rounded"
+                  >
+                    <option value="">-- Select --</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 2: Academic Info -->
+            <div id="step2" class="form-step" style="display: none">
+              <h3 class="text-xl font-bold text-blue-400 mb-4">
+                Academic Background
+              </h3>
+              <div class="form-grid">
+                <div>
+                  <label class="block text-blue-300 text-sm font-bold mb-2"
+                    >College/University *</label
+                  >
+                  <input
+                    type="text"
+                    name="college"
+                    class="form-input w-full px-4 py-2 rounded"
+                    placeholder="Your Institution"
+                    required
+                  />
+                </div>
+                <div>
+                  <label class="block text-blue-300 text-sm font-bold mb-2"
+                    >Year of Study *</label
+                  >
+                  <select
+                    name="year"
+                    class="form-input w-full px-4 py-2 rounded"
+                    required
+                  >
+                    <option value="">-- Select Year --</option>
+                    <option value="1st">1st Year</option>
+                    <option value="2nd">2nd Year</option>
+                    <option value="3rd">3rd Year</option>
+                    <option value="4th">4th Year</option>
+                    <option value="graduate">Graduate</option>
+                  </select>
+                </div>
+                <div class="col-span-2">
+                  <label class="block text-blue-300 text-sm font-bold mb-2"
+                    >Domain Interest *</label
+                  >
+                  <div class="space-y-2">
+                    <label class="flex items-center text-gray-300">
+                      <input
+                        type="checkbox"
+                        name="domains"
+                        value="finance"
+                        class="mr-2"
+                      />
+                      Finance Analytics
+                    </label>
+                    <label class="flex items-center text-gray-300">
+                      <input
+                        type="checkbox"
+                        name="domains"
+                        value="tech"
+                        class="mr-2"
+                      />
+                      Tech Consulting
+                    </label>
+                    <label class="flex items-center text-gray-300">
+                      <input
+                        type="checkbox"
+                        name="domains"
+                        value="strategy"
+                        class="mr-2"
+                      />
+                      Strategic Planning
+                    </label>
+                    <label class="flex items-center text-gray-300">
+                      <input
+                        type="checkbox"
+                        name="domains"
+                        value="data"
+                        class="mr-2"
+                      />
+                      Data Science
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Experience -->
+            <div id="step3" class="form-step" style="display: none">
+              <h3 class="text-xl font-bold text-blue-400 mb-4">
+                Experience & Skills
+              </h3>
+              <div class="form-grid">
+                <div class="col-span-2">
+                  <label class="block text-blue-300 text-sm font-bold mb-2"
+                    >Skills (Check all that apply)</label
+                  >
+                  <div class="grid grid-cols-2 gap-2">
+                    <label class="flex items-center text-gray-300">
+                      <input
+                        type="checkbox"
+                        name="skills"
+                        value="python"
+                        class="mr-2"
+                      />
+                      Python
+                    </label>
+                    <label class="flex items-center text-gray-300">
+                      <input
+                        type="checkbox"
+                        name="skills"
+                        value="sql"
+                        class="mr-2"
+                      />
+                      SQL
+                    </label>
+                    <label class="flex items-center text-gray-300">
+                      <input
+                        type="checkbox"
+                        name="skills"
+                        value="excel"
+                        class="mr-2"
+                      />
+                      Excel
+                    </label>
+                    <label class="flex items-center text-gray-300">
+                      <input
+                        type="checkbox"
+                        name="skills"
+                        value="powerbi"
+                        class="mr-2"
+                      />
+                      Power BI
+                    </label>
+                    <label class="flex items-center text-gray-300">
+                      <input
+                        type="checkbox"
+                        name="skills"
+                        value="tableau"
+                        class="mr-2"
+                      />
+                      Tableau
+                    </label>
+                    <label class="flex items-center text-gray-300">
+                      <input
+                        type="checkbox"
+                        name="skills"
+                        value="communication"
+                        class="mr-2"
+                      />
+                      Communication
+                    </label>
+                  </div>
+                </div>
+                <div>
+                  <label class="block text-blue-300 text-sm font-bold mb-2"
+                    >LinkedIn Profile</label
+                  >
+                  <input
+                    type="url"
+                    name="linkedin"
+                    class="form-input w-full px-4 py-2 rounded"
+                    placeholder="https://linkedin.com/in/..."
+                  />
+                </div>
+                <div>
+                  <label class="block text-blue-300 text-sm font-bold mb-2"
+                    >Experience Level</label
+                  >
+                  <select
+                    name="experience"
+                    class="form-input w-full px-4 py-2 rounded"
+                  >
+                    <option value="">-- Select --</option>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4: Motivation -->
+            <div id="step4" class="form-step" style="display: none">
+              <h3 class="text-xl font-bold text-blue-400 mb-4">
+                Motivation & Goals
+              </h3>
+              <div class="space-y-4">
+                <div>
+                  <label class="block text-blue-300 text-sm font-bold mb-2"
+                    >Why do you want to join ACC Club? *</label
+                  >
+                  <textarea
+                    name="motivation"
+                    class="form-input w-full px-4 py-2 rounded"
+                    rows="5"
+                    placeholder="Tell us about your goals and why you're interested in joining..."
+                    required
+                  ></textarea>
+                </div>
+                <div>
+                  <label class="block text-blue-300 text-sm font-bold mb-2"
+                    >Additional Message</label
+                  >
+                  <textarea
+                    name="message"
+                    class="form-input w-full px-4 py-2 rounded"
+                    rows="3"
+                    placeholder="Anything else you'd like us to know?"
+                  ></textarea>
+                </div>
+                <label class="flex items-center text-gray-300">
+                  <input type="checkbox" name="newsletter" class="mr-2" />
+                  Subscribe to our monthly newsletter and updates
+                </label>
+              </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex gap-4 mt-8">
+              <button
+                type="button"
+                id="prevBtn"
+                onclick="changeStep(-1)"
+                class="flex-1 bg-gray-600 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition"
+                style="display: none"
+              >
+                <i class="fas fa-arrow-left mr-2"></i> Previous
+              </button>
+              <button
+                class="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold py-2 px-4 rounded transition"
+              >
+                Next <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+              <button
+                type="submit"
+                id="submitBtn"
+                onclick="submitRegistration(event)"
+                class="flex-1 bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-800 hover:to-blue-900 text-white font-bold py-2 px-4 rounded transition"
+                style="display: none"
+              >
+                Submit <i class="fas fa-check ml-2"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+      // Animate stat counters
+      function animateCounters() {
+        const statNumbers = document.querySelectorAll(".stat-number");
+
+        statNumbers.forEach((stat) => {
+          const target = parseInt(stat.getAttribute("data-target"));
+          let current = 0;
+          const increment = target / 50;
+
+          const updateCount = () => {
+            if (current < target) {
+              current += increment;
+              stat.textContent = Math.floor(current);
+              setTimeout(updateCount, 30);
+            } else {
+              stat.textContent = target;
+            }
+          };
+
+          updateCount();
+        });
+      }
+
+      // Trigger animation when page loads
+      window.addEventListener("load", () => {
+        setTimeout(animateCounters, 500);
+      });
+
+      // Show notification toast
+      function showNotification(message, type = "info") {
+        const toast = document.createElement("div");
+        toast.className = "toast-notification";
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+
+      // Multi-step form state
+      let currentFormStep = 1;
+
+      // Open registration form
+      function openRegistrationForm() {
+        document.getElementById("registrationModal").classList.add("show");
+        currentFormStep = 1;
+        showFormStep(1);
+        showNotification("Registration form opened!", "success");
+      }
+
+      // Close registration form
+      function closeRegistrationForm(event) {
+        if (event && event.target.id !== "registrationModal") return;
+        document.getElementById("registrationModal").classList.remove("show");
+
+        // Reset form state
+        setTimeout(() => {
+          document.getElementById("multiStepForm").reset();
+          document.getElementById("formContent").style.display = "block";
+          document.getElementById("successScreen").style.display = "none";
+          currentFormStep = 1;
+          showFormStep(1);
+        }, 300);
+      }
+
+      // Show specific form step
+      function showFormStep(step) {
+        // Hide all steps
+        for (let i = 1; i <= 4; i++) {
+          document.getElementById(`step${i}`).style.display = "none";
+        }
+
+        // Show current step
+        document.getElementById(`step${step}`).style.display = "block";
+
+        // Update progress bar
+        document.getElementById("progressBar").style.width =
+          `${(step / 4) * 100}%`;
+        document.getElementById("currentStep").textContent = step;
+
+        // Update button visibility
+        document.getElementById("prevBtn").style.display =
+          step === 1 ? "none" : "block";
+        document.getElementById("nextBtn").style.display =
+          step === 4 ? "none" : "block";
+        document.getElementById("submitBtn").style.display =
+          step === 4 ? "block" : "none";
+
+        // Scroll to top of form
+        document.querySelector(".modal-form").scrollTop = 0;
+      }
+
+      // Change form step
+      function changeStep(direction) {
+        const newStep = currentFormStep + direction;
+
+        if (newStep >= 1 && newStep <= 4) {
+          // Validate current step before moving forward
+          if (direction === 1 && !validateStep(currentFormStep)) {
+            showNotification("Please fill all required fields", "error");
+            return;
+          }
+
+          currentFormStep = newStep;
+          showFormStep(newStep);
+        }
+      }
+
+      // Validate form step
+      function validateStep(step) {
+        const form = document.getElementById("multiStepForm");
+
+        if (step === 1) {
+          const name = form.querySelector('input[name="name"]').value.trim();
+          const email = form.querySelector('input[name="email"]').value.trim();
+          const phone = form.querySelector('input[name="phone"]').value.trim();
+
+          if (!name || !email || !phone) return false;
+
+          // Validate email format
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            showNotification("Please enter a valid email address", "error");
+            return false;
+          }
+
+          // Validate phone format (10 digits)
+          const phoneRegex = /^\d{10}$/;
+          if (!phoneRegex.test(phone.replace(/\D/g, ""))) {
+            showNotification(
+              "Please enter a valid 10-digit phone number",
+              "error",
+            );
+            return false;
+          }
+
+          return true;
+        }
+
+        if (step === 2) {
+          const college = form
+            .querySelector('input[name="college"]')
+            .value.trim();
+          const year = form.querySelector('select[name="year"]').value;
+          const domains = document.querySelectorAll(
+            'input[name="domains"]:checked',
+          );
+
+          if (!college || !year || domains.length === 0) {
+            showNotification(
+              "Please complete all fields in this step",
+              "error",
+            );
+            return false;
+          }
+
+          return true;
+        }
+
+        if (step === 3) {
+          // Step 3 is optional, can proceed
+          return true;
+        }
+
+        if (step === 4) {
+          const motivation = form
+            .querySelector('textarea[name="motivation"]')
+            .value.trim();
+          if (!motivation) {
+            showNotification(
+              "Please tell us your motivation for joining",
+              "error",
+            );
+            return false;
+          }
+          return true;
+        }
+
+        return true;
+      }
+
+      // API Configuration
+      const API_BASE_URL = "http://localhost:8000/api";
+
+      // Load team members from backend
+      async function loadTeamMembers() {
+        try {
+          const response = await fetch(`${API_BASE_URL}/team`);
+          const result = await response.json();
+
+          if (result.success && result.data) {
+            console.log("Loaded team members:", result.data);
+            // Team members loaded successfully
+            // The team is pre-rendered in HTML, so no need to rebuild
+            // but this confirms API connectivity
+          }
+        } catch (error) {
+          console.warn("Could not load team from backend:", error);
+          // Team will still display from static HTML
+        }
+      }
+
+      // Load projects from backend
+      async function loadProjects() {
+        try {
+          const response = await fetch(`${API_BASE_URL}/projects`);
+          const result = await response.json();
+
+          if (result.success && result.data) {
+            console.log("Loaded projects:", result.data);
+            // Projects loaded successfully
+          }
+        } catch (error) {
+          console.warn("Could not load projects from backend:", error);
+        }
+      }
+
+      // Check backend connection
+      async function checkBackendConnection() {
+        try {
+          const response = await fetch("http://localhost:8000/health");
+          const result = await response.json();
+          if (result.status === "healthy") {
+            console.log("✓ Backend API is connected and running!");
+            showNotification("Backend API connected ✓", "success");
+            return true;
+          }
+        } catch (error) {
+          console.warn("Backend not available yet");
+          return false;
+        }
+      }
+
+      // Initialize API connections on page load
+      window.addEventListener("load", async () => {
+        // Try to connect to backend
+        const isConnected = await checkBackendConnection();
+        if (isConnected) {
+          loadTeamMembers();
+          loadProjects();
+        }
+      });
+      async function submitRegistration(event) {
+        event.preventDefault();
+
+        if (!validateStep(4)) return;
+
+        const form = document.getElementById("multiStepForm");
+        const formData = new FormData(form);
+
+        // Convert year to semester (1st Year = 1, 2nd Year = 2, etc.)
+        const yearMap = {
+          "1st": 1,
+          "2nd": 2,
+          "3rd": 3,
+          "4th": 4,
+          "graduate": 5,
+        };
+        const semester = yearMap[formData.get("year")] || 1;
+
+        // Generate enrollment number from timestamp and random
+        const enrollmentNo = `202${Math.floor(Math.random() * 1000000)
+          .toString()
+          .padStart(6, "0")}`;
+
+        // Prepare data for backend API
+        const registrationData = {
+          name: formData.get("name"),
+          email: formData.get("email"),
+          phone: formData.get("phone"),
+          enrollment_no: enrollmentNo,
+          department: formData.get("college") || "Computer Science",
+          semester: semester,
+          why_join: formData.get("motivation"),
+        };
+
+        console.log("Sending registration to backend:", registrationData);
+
+        try {
+          // Show loading notification
+          showNotification("Submitting registration...", "info");
+
+          // Send to backend API
+          const response = await fetch(`${API_BASE_URL}/registrations`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(registrationData),
+          });
+
+          const result = await response.json();
+
+          if (result.success) {
+            // Show success screen
+            document.getElementById("formContent").style.display = "none";
+            document.getElementById("successScreen").style.display = "block";
+
+            // Show confirmation details
+            const confirmationHTML = `
+              <p><strong>Name:</strong> ${registrationData.name}</p>
+              <p><strong>Email:</strong> ${registrationData.email}</p>
+              <p><strong>Phone:</strong> ${registrationData.phone}</p>
+              <p><strong>Enrollment:</strong> ${registrationData.enrollment_no}</p>
+              <p style="margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.1);">
+                Your registration has been received! Check your email for next steps.
+              </p>
+            `;
+
+            document.getElementById("confirmationDetails").innerHTML =
+              confirmationHTML;
+
+            // Store in localStorage
+            localStorage.setItem(
+              "accClubRegistration",
+              JSON.stringify(result.data),
+            );
+
+            showNotification(
+              `Welcome ${registrationData.name}! Registration successful!`,
+              "success",
+            );
+          } else {
+            showNotification(
+              `Registration failed: ${result.message}`,
+              "error",
+            );
+          }
+        } catch (error) {
+          console.error("Registration error:", error);
+          showNotification(
+            "Connection error. Is the backend running? (python backend/main.py)",
+            "error",
+          );
+        }
+      }
+
+      // Schedule call function
+      function scheduleCall() {
+        const timeSlots = ["10:00 AM", "2:00 PM", "4:00 PM", "6:00 PM"];
+        const randomSlot =
+          timeSlots[Math.floor(Math.random() * timeSlots.length)];
+        showNotification(
+          `Call scheduled for ${randomSlot}. Check your email!`,
+          "success",
+        );
+      }
+
+      // Scroll to section
+      function scrollToSection(sectionId) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+          showNotification(
+            `Navigating to ${sectionId.toUpperCase()}...`,
+            "success",
+          );
+        }
+      }
+
+      // Gallery modal
+      function openModal(index) {
+        const modal = document.getElementById("galleryModal");
+        const modalImage = document.getElementById("modalImage");
+        const images = [
+          "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+          "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
+        ];
+        modalImage.src = images[index];
+        modal.classList.add("show");
+      }
+
+      function closeModal(event) {
+        if (event && event.target.id !== "galleryModal") return;
+        const modal = document.getElementById("galleryModal");
+        modal.classList.remove("show");
+      }
+
+      function toggleMenu() {
+        showNotification("Mobile menu opened!", "info");
+      }
+
+      // Add social links functionality
+      document.querySelectorAll(".fab").forEach((icon) => {
+        const parent = icon.parentElement;
+        if (parent.tagName === "A") {
+          parent.addEventListener("click", function (e) {
+            e.preventDefault();
+            const socialType = this.querySelector("i").className;
+            showNotification(`Opening social profile...`, "info");
+          });
+        }
+      });
+
+      // Footer links
+      document.querySelectorAll("footer a").forEach((link) => {
+        link.addEventListener("click", function (e) {
+          if (
+            this.getAttribute("href") === "#" ||
+            this.getAttribute("href").startsWith("http")
+          ) {
+            e.preventDefault();
+            const text = this.textContent.trim();
+            showNotification(`${text} section loading...`, "info");
+          }
+        });
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          const href = this.getAttribute("href");
+          if (href !== "#" && document.querySelector(href)) {
+            e.preventDefault();
+            document.querySelector(href).scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
