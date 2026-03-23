@@ -1,31 +1,13 @@
 {
   "version": 2,
-  "public": true,
-  "buildCommand": "echo 'Static build'",
-  "outputDirectory": ".",
-  "env": {
-    "PYTHON_VERSION": "3.11"
-  },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/docs",
-      "dest": "/api/index.py"
+      "source": "/health",
+      "destination": "/api/index.py"
     },
     {
-      "src": "/openapi.json",
-      "dest": "/api/index.py"
-    },
-    {
-      "src": "/health",
-      "dest": "/api/index.py"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/index.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
+      "source": "/api/(.*)",
+      "destination": "/api/index.py"
     }
   ]
 }
