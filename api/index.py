@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler
 
@@ -43,6 +44,13 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(json.dumps(payload).encode("utf-8"))
 
+    def _send_html(self, html, status=200):
+        self.send_response(status)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        self.wfile.write(html.encode("utf-8"))
+
     def do_OPTIONS(self):
         self.send_response(204)
         self.send_header("Access-Control-Allow-Origin", "*")
@@ -51,6 +59,24 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_GET(self):
+        if self.path == "/" or self.path == "/index.html":
+            try:
+                root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+                index_file = os.path.join(root_dir, "index.html")
+                with open(index_file, "r", encoding="utf-8") as f:
+                    self._send_html(f.read())
+                return
+            except Exception:
+                self._send_json(
+                    {
+                        "success": False,
+                        "message": "Homepage not found",
+                        "time": datetime.utcnow().isoformat(),
+                    },
+                    status=500,
+                )
+                return
+
         if self.path == "/health":
             self._send_json({"status": "healthy", "service": "acc-club-api"})
             return
@@ -67,13 +93,7 @@ class handler(BaseHTTPRequestHandler):
             self._send_json({"success": True, "data": REGISTRATIONS_DB, "count": len(REGISTRATIONS_DB)})
             return
 
-        self._send_json(
-            {
-                "success": True,
-                "message": "ACC Club API is running",
-                "time": datetime.utcnow().isoformat(),
-            }
-        )
+        self._send_json({"success": False, "message": "Not found"}, status=404)
 
     def do_POST(self):
         if self.path != "/api/registrations":
